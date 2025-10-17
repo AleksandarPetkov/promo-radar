@@ -1,0 +1,37 @@
+services:
+  users:
+    image: "pr-users"
+    container_name: users-ms
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - promo-radar
+  promotions:
+    image: "pr-promotions"
+    container_name: promotions-ms
+    ports:
+      - "8090:8090"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - promo-radar
+  products:
+    image: "pr-products"
+    container_name: products-ms
+    ports:
+      - "9000:9000"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - promo-radar
+networks:
+  promo-radar:
+    driver: "bridge"
