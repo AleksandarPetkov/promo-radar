@@ -32,6 +32,7 @@ services:
           memory: 700m
     networks:
       - promo-radar
+
   datacollector:
     image: "pr-datacollector"
     container_name: datacollector-ms
@@ -43,22 +44,45 @@ services:
           memory: 700m
     networks:
       - promo-radar
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - promo-radar
+
   kafka:
     image: confluentinc/cp-kafka:7.5.0
     container_name: kafka
+    depends_on:
+      - zookeeper
     ports:
       - "9092:9092"
     environment:
       KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-#      KAFKA_PROCESS_ROLES: broker,controller
-#      KAFKA_NODE_ID: 1
-#      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
-#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
-#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
       - promo-radar
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.5.0
+    container_name: schema-registry
+    depends_on:
+      - kafka
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
 networks:
   promo-radar:
     driver: "bridge"

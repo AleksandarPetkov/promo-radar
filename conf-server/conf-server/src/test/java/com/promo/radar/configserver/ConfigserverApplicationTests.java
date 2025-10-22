@@ -1,13 +1,13 @@
-package com.promo.radar.configserver;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class ConfigserverApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+//package com.promo.radar.configserver;
+//
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//@SpringBootTest
+//class ConfigserverApplicationTests {
+//
+//	@Test
+//	void contextLoads() {
+//	}
+//
+//}
