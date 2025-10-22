@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
 
     // The value is reading from the Config Server
-    @Value("${products.greeting.message}")
+//    @Value("${products.greeting.message}") // TODO Uncomment when complete docker conf
     private String greetingMessage;
 
     @GetMapping
     public ResponseEntity<String> hello() {
-        return ResponseEntity.ok(greetingMessage);
+//        return ResponseEntity.ok(greetingMessage);
+        return ResponseEntity.ok("greetingMessage");
     }
 
 }

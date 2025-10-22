@@ -1,26 +1,26 @@
 services:
-  users:
-    image: "pr-users"
-    container_name: users-ms
-    ports:
-      - "8080:8080"
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    networks:
-      - promo-radar
-  promotions:
-    image: "pr-promotions"
-    container_name: promotions-ms
-    ports:
-      - "8090:8090"
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    networks:
-      - promo-radar
+#  users:
+#    image: "pr-users"
+#    container_name: users-ms
+#    ports:
+#      - "8080:8080"
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 700m
+#    networks:
+#      - promo-radar
+#  promotions:
+#    image: "pr-promotions"
+#    container_name: promotions-ms
+#    ports:
+#      - "8090:8090"
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 700m
+#    networks:
+#      - promo-radar
   products:
     image: "pr-products"
     container_name: products-ms
@@ -30,6 +30,33 @@ services:
       resources:
         limits:
           memory: 700m
+    networks:
+      - promo-radar
+  datacollector:
+    image: "pr-datacollector"
+    container_name: datacollector-ms
+    ports:
+      - "9010:9010"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - promo-radar
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+#      KAFKA_PROCESS_ROLES: broker,controller
+#      KAFKA_NODE_ID: 1
+#      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
     networks:
       - promo-radar
 networks:
