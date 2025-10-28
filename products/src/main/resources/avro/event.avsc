@@ -1,0 +1,9 @@
+{
+  "type": "record",
+  "name": "Event",
+  "namespace": "com.promo.radar.products.dto",
+  "fields": [
+    { "name": "version", "type": "string" },
+    { "name": "description", "type": "string" }
+  ]
+}

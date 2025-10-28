@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.promo.radar.datacollector.dto;
+package com.promo.radar.products.dto;
 
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.util.Utf8;
@@ -13,10 +13,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class Event extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -3714311221887673024L;
+  private static final long serialVersionUID = 5428081136511451712L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Event\",\"namespace\":\"com.promo.radar.datacollector.dto\",\"fields\":[{\"name\":\"version\",\"type\":\"string\"},{\"name\":\"description\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Event\",\"namespace\":\"com.promo.radar.products.dto\",\"fields\":[{\"name\":\"version\",\"type\":\"string\"},{\"name\":\"description\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -157,8 +157,8 @@ public class Event extends org.apache.avro.specific.SpecificRecordBase implement
    * Creates a new Event RecordBuilder.
    * @return A new Event RecordBuilder
    */
-  public static com.promo.radar.datacollector.dto.Event.Builder newBuilder() {
-    return new com.promo.radar.datacollector.dto.Event.Builder();
+  public static com.promo.radar.products.dto.Event.Builder newBuilder() {
+    return new com.promo.radar.products.dto.Event.Builder();
   }
 
   /**
@@ -166,11 +166,11 @@ public class Event extends org.apache.avro.specific.SpecificRecordBase implement
    * @param other The existing builder to copy.
    * @return A new Event RecordBuilder
    */
-  public static com.promo.radar.datacollector.dto.Event.Builder newBuilder(com.promo.radar.datacollector.dto.Event.Builder other) {
+  public static com.promo.radar.products.dto.Event.Builder newBuilder(com.promo.radar.products.dto.Event.Builder other) {
     if (other == null) {
-      return new com.promo.radar.datacollector.dto.Event.Builder();
+      return new com.promo.radar.products.dto.Event.Builder();
     } else {
-      return new com.promo.radar.datacollector.dto.Event.Builder(other);
+      return new com.promo.radar.products.dto.Event.Builder(other);
     }
   }
 
@@ -179,11 +179,11 @@ public class Event extends org.apache.avro.specific.SpecificRecordBase implement
    * @param other The existing instance to copy.
    * @return A new Event RecordBuilder
    */
-  public static com.promo.radar.datacollector.dto.Event.Builder newBuilder(com.promo.radar.datacollector.dto.Event other) {
+  public static com.promo.radar.products.dto.Event.Builder newBuilder(com.promo.radar.products.dto.Event other) {
     if (other == null) {
-      return new com.promo.radar.datacollector.dto.Event.Builder();
+      return new com.promo.radar.products.dto.Event.Builder();
     } else {
-      return new com.promo.radar.datacollector.dto.Event.Builder(other);
+      return new com.promo.radar.products.dto.Event.Builder(other);
     }
   }
 
@@ -206,7 +206,7 @@ public class Event extends org.apache.avro.specific.SpecificRecordBase implement
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.promo.radar.datacollector.dto.Event.Builder other) {
+    private Builder(com.promo.radar.products.dto.Event.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.version)) {
         this.version = data().deepCopy(fields()[0].schema(), other.version);
@@ -222,7 +222,7 @@ public class Event extends org.apache.avro.specific.SpecificRecordBase implement
      * Creates a Builder by copying an existing Event instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.promo.radar.datacollector.dto.Event other) {
+    private Builder(com.promo.radar.products.dto.Event other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.version)) {
         this.version = data().deepCopy(fields()[0].schema(), other.version);
@@ -248,7 +248,7 @@ public class Event extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'version'.
       * @return This builder.
       */
-    public com.promo.radar.datacollector.dto.Event.Builder setVersion(java.lang.CharSequence value) {
+    public com.promo.radar.products.dto.Event.Builder setVersion(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.version = value;
       fieldSetFlags()[0] = true;
@@ -268,7 +268,7 @@ public class Event extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'version' field.
       * @return This builder.
       */
-    public com.promo.radar.datacollector.dto.Event.Builder clearVersion() {
+    public com.promo.radar.products.dto.Event.Builder clearVersion() {
       version = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -288,7 +288,7 @@ public class Event extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'description'.
       * @return This builder.
       */
-    public com.promo.radar.datacollector.dto.Event.Builder setDescription(java.lang.CharSequence value) {
+    public com.promo.radar.products.dto.Event.Builder setDescription(java.lang.CharSequence value) {
       validate(fields()[1], value);
       this.description = value;
       fieldSetFlags()[1] = true;
@@ -308,7 +308,7 @@ public class Event extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'description' field.
       * @return This builder.
       */
-    public com.promo.radar.datacollector.dto.Event.Builder clearDescription() {
+    public com.promo.radar.products.dto.Event.Builder clearDescription() {
       description = null;
       fieldSetFlags()[1] = false;
       return this;
