@@ -1,26 +1,15 @@
 services:
-#  users:
-#    image: "pr-users"
-#    container_name: users-ms
-#    ports:
-#      - "8080:8080"
-#    deploy:
-#      resources:
-#        limits:
-#          memory: 700m
-#    networks:
-#      - promo-radar
-#  promotions:
-#    image: "pr-promotions"
-#    container_name: promotions-ms
-#    ports:
-#      - "8090:8090"
-#    deploy:
-#      resources:
-#        limits:
-#          memory: 700m
-#    networks:
-#      - promo-radar
+  users:
+    image: "pr-users"
+    container_name: users-ms
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - promo-radar
   products:
     image: "pr-products"
     container_name: products-ms
@@ -32,7 +21,6 @@ services:
           memory: 700m
     networks:
       - promo-radar
-
   datacollector:
     image: "pr-datacollector"
     container_name: datacollector-ms
@@ -44,7 +32,6 @@ services:
           memory: 700m
     networks:
       - promo-radar
-
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
     container_name: zookeeper
@@ -55,7 +42,6 @@ services:
       - "2181:2181"
     networks:
       - promo-radar
-
   kafka:
     image: confluentinc/cp-kafka:7.5.0
     container_name: kafka
@@ -71,7 +57,6 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
       - promo-radar
-
   schema-registry:
     image: confluentinc/cp-schema-registry:7.5.0
     container_name: schema-registry
@@ -85,6 +70,29 @@ services:
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
     networks:
       - promo-radar
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.4.0
+    container_name: keycloak
+    ports:
+      - "127.0.0.1:7080:8080"
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: "admin"
+      KC_BOOTSTRAP_ADMIN_PASSWORD: "admin"
+    command: "start-dev"
+    networks:
+      - promo-radar
+  gatewayserver:
+    image: "pr-gateway"
+    container_name: gatewayserver-ms
+    depends_on:
+      - keycloak
+    ports:
+      - "8072:8072"
+    environment:
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI: "http://keycloak:8080/realms/master/protocol/openid-connect/certs"
+    networks:
+      - promo-radar
+
 networks:
   promo-radar:
     driver: "bridge"
