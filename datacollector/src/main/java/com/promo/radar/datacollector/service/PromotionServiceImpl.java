@@ -1,12 +1,11 @@
 package com.promo.radar.datacollector.service;
 
 import com.promo.radar.datacollector.dto.Event;
+import com.promo.radar.datacollector.dto.Message;
 import com.promo.radar.datacollector.kafka.MessageProducer;
-import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,5 +30,14 @@ public class PromotionServiceImpl implements PromotionService {
         messageProducer.sendMessage(topicName, event);
 
         return event;
+    }
+
+    @Override
+    public Message sendKafkaMessage(Message message) {
+        log.info("New Kafka event arrived: {}", topicName);
+
+        messageProducer.sendMessage(message.topicName(), message.event());
+
+        return message;
     }
 }

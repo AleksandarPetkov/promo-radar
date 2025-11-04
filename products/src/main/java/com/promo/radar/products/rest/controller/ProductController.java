@@ -17,7 +17,7 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<String> hello() {
 //        return ResponseEntity.ok(greetingMessage);
-        return ResponseEntity.ok("greetingMessage");
+        return ResponseEntity.ok("Hello From Product Controller");
     }
 
 }
