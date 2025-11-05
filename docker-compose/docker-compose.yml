@@ -82,7 +82,7 @@ services:
     networks:
       - promo-radar
   gatewayserver:
-    image: "pr-gateway"
+    image: "pr-gatewayserver"
     container_name: gatewayserver-ms
     depends_on:
       - keycloak

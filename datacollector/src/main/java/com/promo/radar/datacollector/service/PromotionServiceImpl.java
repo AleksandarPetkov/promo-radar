@@ -34,9 +34,9 @@ public class PromotionServiceImpl implements PromotionService {
 
     @Override
     public Message sendKafkaMessage(Message message) {
-        log.info("New Kafka event arrived: {}", topicName);
+        log.info("New Kafka event arrived: {}", message);
 
-        messageProducer.sendMessage(message.topicName(), message.event());
+        messageProducer.sendMessage(topicName, new Event(message.version(), message.description()));
 
         return message;
     }

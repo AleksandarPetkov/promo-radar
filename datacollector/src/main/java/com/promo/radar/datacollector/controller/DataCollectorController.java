@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/datacollector")
+@RequestMapping("/api/datacollector")
 public class DataCollectorController {
 
     private final PromotionService promotionService;

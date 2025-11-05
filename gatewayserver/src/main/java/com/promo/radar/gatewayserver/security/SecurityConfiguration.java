@@ -13,25 +13,17 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
-        serverHttpSecurity.authorizeExchange(exchanges -> exchanges.pathMatchers(HttpMethod.GET)
-                        .permitAll()
-                .pathMatchers("/api/datacollector/**"))
-//                        .pathMatchers("/xx/xx/**").hasRole("ACCOUNTS"))
-                .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
-//                        .jwt(jwtSpec -> jwtSpec.jwtAuthenticationConverter(grantedAuthoritiesExtractor())));
-        .jwt(Customizer.withDefaults()));
-
-        serverHttpSecurity.csrf(ServerHttpSecurity.CsrfSpec::disable);
-
-        return serverHttpSecurity.build();
+    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+        return http
+                .csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .authorizeExchange(exchanges -> exchanges
+                        .pathMatchers(HttpMethod.GET).permitAll()
+                        .pathMatchers("/api/datacollector/**").authenticated()
+                        .anyExchange().permitAll()
+                )
+                .oauth2ResourceServer(oauth2 -> oauth2
+                        .jwt(Customizer.withDefaults())
+                )
+                .build();
     }
-
-//    private Converter<Jwt, Mono<AbstractAuthenticationToken>> grantedAuthoritiesExtractor() {
-//        JwtAuthenticationConverter jwtAuthenticationConverter =
-//                new JwtAuthenticationConverter();
-//        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter
-//                (new KeycloakRoleConverter());
-//        return new ReactiveJwtAuthenticationConverterAdapter(jwtAuthenticationConverter);
-//    }
 }
